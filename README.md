@@ -39,6 +39,8 @@ class ViewController: UIViewController {
 }
 ```
 
+# Output console
+
 ``` console
 114 bytes
 it prints the number of bytes stored in the Data Object
