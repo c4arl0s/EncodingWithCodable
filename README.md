@@ -1,15 +1,6 @@
-# Note.swift
+# Encoding with Codable
 
-``` swift
-//
-//  Note.swift
-//  EncodingWithCodable
-//
-//  Created by Carlos Santiago Cruz on 11/19/18.
-//  Copyright © 2018 Carlos Santiago Cruz. All rights reserved.
-//
-import Foundation
-
+```swift
 struct Note: Codable {
     let title: String
     let text: String
@@ -17,34 +8,32 @@ struct Note: Codable {
 }
 ```
 
-# ViewController.m
+### Creating an instance of Note
 
-``` swift
-import UIKit
+```swift
+let newNote = Note(title: "new note", text: "this is a new note", timestamp: Date())
+```
 
-class ViewController: UIViewController {
+### encode a value to a plist
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let newNote = Note(title: "new note", text: "this is a new note", timestamp: Date())
-        // now look at the following example to see how to use encoder object to encode a value to a plist.
+```swift
         let propertyListEncoder = PropertyListEncoder()
         if let encodableNote = try? propertyListEncoder.encode(newNote) {
             print(encodableNote)
             print("it prints the number of bytes stored in the Data Object")
         }
-    }
-
-
-}
 ```
 
-# Output console
 
-``` console
-114 bytes
-it prints the number of bytes stored in the Data Object
-```
+# Writing data to a file
+
+
+
+# Writing the data
+
+# Saving an Array of Model Data
+
+
 
 
 
