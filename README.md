@@ -59,8 +59,6 @@ if let decodedNote = try? propertyListDecoder.decode(Note.self, from: encodedNot
 ```
 
 
-# Writing the data
-
 # Saving an Array of Model Data
 
 
