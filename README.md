@@ -61,7 +61,7 @@ if let decodedNote = try? propertyListDecoder.decode(Note.self, from: encodedNot
 
 # Saving an Array of Model Data
 
-
+- You just save the array of notes, and then encode notes array.
 
 
 
