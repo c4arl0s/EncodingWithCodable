@@ -24,6 +24,13 @@ if let encodedNote = try? propertyListEncoder.encode(newNote) {
 }
 ```
 
+```swift
+// now we are going to decode
+let propertyListDecoder = PropertyListDecoder()
+if let decodedNote = try? propertyListDecoder.decode(Note.self, from: encodedNote) {
+    print(decodedNote)
+}
+```
 
 # Writing data to a file
 
