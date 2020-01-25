@@ -18,8 +18,8 @@ let newNote = Note(title: "new note", text: "this is a new note", timestamp: Dat
 
 ```swift
         let propertyListEncoder = PropertyListEncoder()
-        if let encodableNote = try? propertyListEncoder.encode(newNote) {
-            print(encodableNote)
+        if let encodedNote = try? propertyListEncoder.encode(newNote) {
+            print(encodedNote)
             print("it prints the number of bytes stored in the Data Object")
         }
 ```
