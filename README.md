@@ -1,13 +1,6 @@
-``` swift
-//
-//  Note.swift
-//  EncodingWithCodable
-//
-//  Created by Carlos Santiago Cruz on 11/19/18.
-//  Copyright © 2018 Carlos Santiago Cruz. All rights reserved.
-//
-import Foundation
+# Encoding with Codable
 
+```swift
 struct Note: Codable {
     let title: String
     let text: String
@@ -15,23 +8,60 @@ struct Note: Codable {
 }
 ```
 
-``` swift
-import UIKit
+### Creating an instance of Note
 
-class ViewController: UIViewController {
+```swift
+let newNote = Note(title: "new note", text: "this is a new note", timestamp: Date())
+```
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let newNote = Note(title: "new note", text: "this is a new note", timestamp: Date())
-        // now look at the following example to see how to use encoder object to encode a value to a plist.
-        let propertyListEncoder = PropertyListEncoder()
-        if let encodableNote = try? propertyListEncoder.encode(newNote) {
-            print(encodableNote)
-            print("it prints the number of bytes stored in the Data Object")
-        }
-    }
+### encode a value to a plist
 
-
+```swift
+let propertyListEncoder = PropertyListEncoder()
+if let encodedNote = try? propertyListEncoder.encode(newNote) {
+    print(encodedNote)
+    print("it prints the number of bytes stored in the Data Object")
 }
 ```
+
+```swift
+// now we are going to decode
+let propertyListDecoder = PropertyListDecoder()
+if let decodedNote = try? propertyListDecoder.decode(Note.self, from: encodedNote) {
+    print(decodedNote)
+}
+```
+
+# Writing data to a file
+
+```swift
+        let newNote = Note(title: "new note", text: "this is a new note", timestamp: Date())
+        // now look at the following example to see how to use encoder object to encode a value to a plist.
+        
+        // where to saved ?
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let archiveURL = documentsDirectory.appendingPathComponent("notes_test").appendingPathExtension("plist")
+        
+        let propertyListEncoder = PropertyListEncoder()
+        if let encodedNote = try? propertyListEncoder.encode(newNote) {
+            print(encodedNote)
+            print("it prints the number of bytes stored in the Data Object")
+            // write
+            try? encodedNote.write(to: archiveURL)
+            
+            // now we are going to decode
+            let propertyListDecoder = PropertyListDecoder()
+            // retrieve and decode
+            if let retrievedNoteData = try? Data(contentsOf: archiveURL), let decodedNote = try propertyListDecoder.decode(Note.self, from: retrievedNoteData) {
+                print(decodedNote)
+            }
+        }
+```
+
+
+# Saving an Array of Model Data
+
+- You just save the array of notes, and then encode notes array.
+
+
 
